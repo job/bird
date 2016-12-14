@@ -1506,7 +1506,12 @@ bgp_log_error(struct bgp_proto *p, u8 class, char *msg, unsigned code, unsigned 
     {
       *t++ = ':';
       *t++ = ' ';
-
+      if ((code == 6) && (subcode == 2))
+        {
+          for (i=1; i<len; i++)
+            t += bsprintf(t, "%c", data[i]);
+        goto done;
+        }
       if ((code == 2) && (subcode == 2) && ((len == 2) || (len == 4)))
 	{
 	  /* Bad peer AS - we would like to print the AS */
