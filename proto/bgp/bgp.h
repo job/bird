@@ -88,6 +88,7 @@ struct bgp_config {
 /* For peer_gr_aflags */
 #define BGP_GRF_FORWARDING 0x80
 
+#define BGP_SHUTDOWN_COMMUNICATION_SIZE 128
 
 struct bgp_conn {
   struct bgp_proto *bgp;
@@ -156,6 +157,7 @@ struct bgp_proto {
   u8 last_error_class; 			/* Error class of last error */
   u32 last_error_code;			/* Error code of last error. BGP protocol errors
 					   are encoded as (bgp_err_code << 16 | bgp_err_subcode) */
+  char shutdown_comm[BGP_SHUTDOWN_COMMUNICATION_SIZE]; /* Shutdown Communication */
 #ifdef IPV6
   byte *mp_reach_start, *mp_unreach_start; /* Multiprotocol BGP attribute notes */
   unsigned mp_reach_len, mp_unreach_len;

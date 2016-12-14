@@ -1578,6 +1578,7 @@ bgp_show_proto_info(struct proto *P)
       const char *err1 = bgp_err_classes[p->last_error_class];
       const char *err2 = bgp_last_errmsg(p);
       cli_msg(-1006, "    Last error:       %s%s", err1, err2);
+      cli_msg(-1006, "    Last shutdown:    %s", p->shutdown_comm);
     }
 }
 
