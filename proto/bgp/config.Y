@@ -107,6 +107,7 @@ bgp_proto:
  | bgp_proto ERROR FORGET TIME expr ';' { BGP_CFG->error_amnesia_time = $5; }
  | bgp_proto ERROR WAIT TIME expr ',' expr ';' { BGP_CFG->error_delay_time_min = $5; BGP_CFG->error_delay_time_max = $7; }
  | bgp_proto DISABLE AFTER ERROR bool ';' { BGP_CFG->disable_after_error = $5; }
+ | bgp_proto DISABLE text ';' { BGP_CFG->shutcomm = $3; } /* draft-ietf-idr-shutdown */
  | bgp_proto ENABLE ROUTE REFRESH bool ';' { BGP_CFG->enable_refresh = $5; }
  | bgp_proto ENABLE AS4 bool ';' { BGP_CFG->enable_as4 = $4; }
  | bgp_proto ENABLE EXTENDED MESSAGES bool ';' { BGP_CFG->enable_extended_messages = $5; }
