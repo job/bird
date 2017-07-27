@@ -1487,6 +1487,15 @@ bgp_last_errmsg(struct bgp_proto *p)
 }
 
 static const char *
+bgp_last_shutmsg(struct bgp_proto *p)
+{
+    if (p->last_received_shutmsg)
+      return(p->last_received_shutmsg);
+    else
+      return(NULL);
+}
+
+static const char *
 bgp_state_dsc(struct bgp_proto *p)
 {
   if (p->p.proto_state == PS_DOWN)
@@ -1580,7 +1589,10 @@ bgp_show_proto_info(struct proto *P)
     {
       const char *err1 = bgp_err_classes[p->last_error_class];
       const char *err2 = bgp_last_errmsg(p);
+      const char *msg  = bgp_last_shutmsg(p);
       cli_msg(-1006, "    Last error:       %s%s", err1, err2);
+      if (msg)
+        cli_msg(-1006, "    Message:          \"%s\"", msg);
     }
 }
 
